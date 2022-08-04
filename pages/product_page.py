@@ -12,9 +12,10 @@ class ProductPage(BasePage):
         assert self.is_element_present(*ProductPageLocators.ADD_TO_BASKET_BTN), \
             "No 'add-to-basket' button"
 
-    def expected_product_should_be_added(self):
+    def should_be_expected_product(self):
+        product_name = self.browser.find_element(*ProductPageLocators.PRODUCT_NAME).text.strip()
         assert self.browser.find_element(*ProductPageLocators.SUCCESS_MESSAGE).text == \
-               "Coders at Work has been added to your basket.", "Expected product was not added"
+               f"{product_name} has been added to your basket.", "Expected product was not added"
 
     def should_not_be_success_message(self):
         assert self.is_not_element_present(*ProductPageLocators.SUCCESS_MESSAGE), \
